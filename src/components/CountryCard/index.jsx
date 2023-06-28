@@ -22,7 +22,7 @@ export default function CountryCard({ el }) {
     // googleMaps
     ();
   return (
-    <div>
+    <div className="text-white">
       {el.name.common} {flag}{' '}
     </div>
   );

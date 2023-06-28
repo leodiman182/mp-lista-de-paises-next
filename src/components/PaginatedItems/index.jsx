@@ -22,8 +22,6 @@ function PaginatedItems({ itemsPerPage }) {
     setItemOffset(newOffset);
   };
 
-  console.log(currentItems);
-
   return (
     <>
       <Items currentItems={currentItems} />
