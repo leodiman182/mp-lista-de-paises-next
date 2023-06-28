@@ -1,24 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import { useContext } from 'react';
 import { Switch } from '@headlessui/react';
-import SunIcon from '../../assets/SunIcon';
-import MoonIcon from '../../assets/MoonIcon';
-import MainContext from '../../context/MainContext';
-import useSound from 'use-sound';
-import clickSound from '../../sounds/click.mp3';
+import SunIcon from '@/assets/SunIcon';
+import MoonIcon from '@/assets/MoonIcon';
+import { useContext } from 'react';
+import MainContext from '@/context/MainContext';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function ToggleThemeButton() {
-  const { themeMode, setThemeMode } = useContext(MainContext);
-  const [play] = useSound(clickSound);
+  const { themeMode } = useContext(MainContext);
+  // const { themeMode, setThemeMode } = useContext(MainContext);
 
   return (
     <Switch
-      onClick={play}
       checked={themeMode}
       onChange={() => {
         themeMode
