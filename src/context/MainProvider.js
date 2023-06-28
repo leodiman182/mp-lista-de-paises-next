@@ -4,9 +4,12 @@ import { useState } from 'react';
 import MainContext from './MainContext';
 
 export default function MainProvider({ children }) {
-  const [countryList, setCountryList] = useState([]);
+  const [api, setApi] = useState([]);
+  const [data, setData] = useState([]);
 
-  const context = { countryList, setCountryList };
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const context = { api, setApi, data, setData, itemOffset, setItemOffset };
 
   return (
     <MainContext.Provider value={context}>{children}</MainContext.Provider>
