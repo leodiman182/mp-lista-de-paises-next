@@ -9,7 +9,7 @@ export default function SearchInput() {
       <input
         onChange={(e) => setSearchInput(e.target.value)}
         value={searchInput}
-        className="px-[20px] py-[6px] rounded-md"
+        className="px-[20px] py-[6px] rounded-md focus:outline-none focus:ring-0"
         placeholder="Search country"
         type="text"
       />
