@@ -14,12 +14,6 @@ function PaginatedItems({ itemsPerPage }) {
   const { api, data, setData, itemOffset, setItemOffset, searchInput } =
     useContext(MainContext);
 
-  const filtered = data.filter((country) =>
-    country.name.common.toLowerCase().includes(searchInput.toLowerCase())
-  );
-
-  console.log(filtered);
-
   useEffect(() => {
     if (searchInput === '') {
       setData(api);
