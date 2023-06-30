@@ -8,7 +8,8 @@ import { Tooltip } from '@mui/material';
 import { numberWithCommas } from '@/utils/formats';
 
 export default function SelectedCountry() {
-  const { selectedCountry } = useContext(MainContext);
+  const { selectedCountry, api } = useContext(MainContext);
+  console.log(selectedCountry);
   const {
     name: { common },
     flags: { svg, alt, png },
@@ -17,12 +18,22 @@ export default function SelectedCountry() {
     languages,
     population,
     capital,
+    cioc,
+    borders,
     maps: { googleMaps },
   } = selectedCountry;
 
   const langArray = Object.entries(languages);
 
   const imgSrc = svg ? svg : png;
+
+  function neighborCountries() {
+    // const neighbors = borders.map((border) => {
+    //   api.find((country) =>
+    //     console.log(country.cioc || country.cca2 || country.cc3 || country.ccn3)
+    //   );
+    // });
+  }
 
   return (
     <>
@@ -48,7 +59,7 @@ export default function SelectedCountry() {
             </span>
           </p>
         </article>
-        <aside className="w-1/2 flex flex-col items-start">
+        <aside className="w-1/2 flex flex-col items-start p-[80px]">
           <Tooltip title={`Where is ${flag} located?`} arrow>
             <Link
               className="inline-block"
@@ -70,13 +81,13 @@ export default function SelectedCountry() {
       <section className="h-full w-full rounded-md bg-zinc-500 p-[20px] text-start">
         <p className="text-white">
           Population:{' '}
-          <span className="text-[40px] text-primary-blue title">
+          <span className="text-[28px] text-primary-blue title">
             {numberWithCommas(population)}
           </span>
         </p>
         <p className="text-white">
           Languages:{' '}
-          <span className="text-[40px] text-primary-blue title">
+          <span className="text-[28px] text-primary-blue title">
             {langArray.map((lang, index) => {
               if (index + 1 === langArray.length) {
                 return lang[1] + '.';
@@ -86,6 +97,20 @@ export default function SelectedCountry() {
             })}
           </span>
         </p>
+        <div>
+          <p className="text-white">
+            Borders:{' '}
+            <span className="text-[28px] text-primary-blue title">
+              {borders.map((border, index) => {
+                if (index + 1 === borders.length) {
+                  return border + '.';
+                } else {
+                  return border + ', ';
+                }
+              })}
+            </span>
+          </p>
+        </div>
       </section>
     </>
   );
