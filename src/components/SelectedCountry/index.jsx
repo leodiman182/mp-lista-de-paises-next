@@ -1,6 +1,6 @@
 import MainContext from '@/context/MainContext';
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import BackButton from '../BackButton';
 import { FaLocationCrosshairs } from 'react-icons/fa6';
 import Link from 'next/link';
@@ -9,7 +9,15 @@ import { numberWithCommas } from '@/utils/formats';
 
 export default function SelectedCountry() {
   const { selectedCountry, api } = useContext(MainContext);
+
   console.log(selectedCountry);
+
+  useEffect(() => {
+    if (!selectedCountry) {
+      redirect('/error');
+    }
+  }, []);
+
   const {
     name: { common },
     flags: { svg, alt, png },
@@ -27,13 +35,13 @@ export default function SelectedCountry() {
 
   const imgSrc = svg ? svg : png;
 
-  function neighborCountries() {
-    // const neighbors = borders.map((border) => {
-    //   api.find((country) =>
-    //     console.log(country.cioc || country.cca2 || country.cc3 || country.ccn3)
-    //   );
-    // });
-  }
+  // function neighborCountries() {
+  //   // const neighbors = borders.map((border) => {
+  //   //   api.find((country) =>
+  //   //     console.log(country.cioc || country.cca2 || country.cc3 || country.ccn3)
+  //   //   );
+  //   // });
+  // }
 
   return (
     <>
@@ -97,20 +105,26 @@ export default function SelectedCountry() {
             })}
           </span>
         </p>
-        <div>
-          <p className="text-white">
-            Borders:{' '}
-            <span className="text-[28px] text-primary-blue title">
-              {borders.map((border, index) => {
-                if (index + 1 === borders.length) {
-                  return border + '.';
-                } else {
-                  return border + ', ';
-                }
-              })}
-            </span>
-          </p>
-        </div>
+        {borders ? (
+          <div>
+            <p className="text-white">
+              Borders:{' '}
+              <span className="text-[28px] text-primary-blue title">
+                {borders.map((border, index) => {
+                  if (index + 1 === borders.length) {
+                    return border + '.';
+                  } else {
+                    return border + ', ';
+                  }
+                })}
+              </span>
+            </p>
+          </div>
+        ) : (
+          <h2 className="text-[28px] text-primary-green title">
+            No borders registered...
+          </h2>
+        )}
       </section>
     </>
   );

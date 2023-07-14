@@ -7,7 +7,7 @@ export default function MainProvider({ children }) {
   const [api, setApi] = useState([]);
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [selectedCountry, setselectedCountry] = useState({});
+  const [selectedCountry, setselectedCountry] = useState();
   const [loading, setLoading] = useState(false);
 
   const [itemOffset, setItemOffset] = useState(0);
